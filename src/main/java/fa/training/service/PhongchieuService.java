@@ -9,47 +9,47 @@ import org.springframework.stereotype.Service;
 
 import fa.training.entities.PhongChieu;
 import fa.training.page.PageAble;
-import fa.training.repository.PhongchieuRepositoryImpl;
+import fa.training.repository.PhongchieuRepository;
 
 @Service
 @Transactional
-public class PhongchieuServiceImpl {
+public class PhongchieuService {
 	
 	@Autowired
-	private PhongchieuRepositoryImpl phongchieuRepositoryImpl;
+	private PhongchieuRepository PhongchieuRepository;
 	
 	public List<PhongChieu> findAll() {
-		return phongchieuRepositoryImpl.findAll();
+		return PhongchieuRepository.findAll();
 	}
 	
 	public void saveOrUpdate(PhongChieu PhongChieu) {
-		phongchieuRepositoryImpl.saveOrUpdate(PhongChieu);
+		PhongchieuRepository.saveOrUpdate(PhongChieu);
 	}
 	
 	public void delete(String id) {
-		PhongChieu PhongChieu = phongchieuRepositoryImpl.findById(id);
+		PhongChieu PhongChieu = PhongchieuRepository.findById(id);
 		if (PhongChieu != null) {
-			phongchieuRepositoryImpl.delete(PhongChieu);
+			PhongchieuRepository.delete(PhongChieu);
 		}
 	}
 	
 	public PhongChieu findById(String id) {
-		return phongchieuRepositoryImpl.findById(id);
+		return PhongchieuRepository.findById(id);
 	}
 	
 	public List<PhongChieu> findWithPageAble(PageAble pageAble) {
-		return phongchieuRepositoryImpl.findWithPageAble(pageAble);
+		return PhongchieuRepository.findWithPageAble(pageAble);
 	}
 	
 	public int totalPages(PageAble pageAble) {
-		return (int) Math.ceil((double) phongchieuRepositoryImpl.count() / pageAble.getSize());
+		return (int) Math.ceil((double) PhongchieuRepository.count() / pageAble.getSize());
 	}
 	
 	public List<PhongChieu> search(String searchKey) {
-		return phongchieuRepositoryImpl.search(searchKey);
+		return PhongchieuRepository.search(searchKey);
 	}
 	
 	public boolean existInDB(String s) {
-		return phongchieuRepositoryImpl.existInDB(s);
+		return PhongchieuRepository.existInDB(s);
 	}
 }

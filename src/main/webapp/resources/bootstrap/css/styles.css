@@ -88,6 +88,7 @@
   --bs-highlight-bg: #fff4cc;
 }
 
+
 *,
 *::before,
 *::after {
@@ -120,6 +121,8 @@ hr {
   border-top: 1px solid;
   opacity: 0.25;
 }
+
+
 
 h6,
 .h6,

@@ -1,4 +1,4 @@
-package fa.training.controller.admin;
+package fa.training.controller;
 
 import java.util.List;
 
@@ -17,21 +17,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import fa.training.entities.PhongChieu;
 import fa.training.page.PageAble;
-import fa.training.service.PhongchieuServiceImpl;
+import fa.training.service.PhongchieuService;
 
 @Controller
 @RequestMapping("/phongchieu")
 public class PhongchieuController {
 	
 	@Autowired
-	private PhongchieuServiceImpl phongchieuServiceImpl;
+	private PhongchieuService PhongchieuService;
 	
 	@GetMapping("/list")
 	public String getAllWithPageAble(Model model, @RequestParam(defaultValue = "1") Integer page) {
 		PageAble pageAble = new PageAble(page);
-		List<PhongChieu> phongchieus = phongchieuServiceImpl.findWithPageAble(pageAble);
+		List<PhongChieu> phongchieus = PhongchieuService.findWithPageAble(pageAble);
 		model.addAttribute("phongchieus", phongchieus);
-		model.addAttribute("totalPages", phongchieuServiceImpl.totalPages(pageAble));
+		model.addAttribute("totalPages", PhongchieuService.totalPages(pageAble));
 		model.addAttribute("currentPage", page);
 		return "/phongchieu/list";
 	}
@@ -48,26 +48,26 @@ public class PhongchieuController {
 			return "/phongchieu/new";
 		}
 		
-		phongchieuServiceImpl.saveOrUpdate(phongchieu);
+		PhongchieuService.saveOrUpdate(phongchieu);
 		return "redirect:/phongchieu/list";
 	}
 	
 	@GetMapping("/delete")
 	public String delete(@RequestParam("id") String id) {
-		phongchieuServiceImpl.delete(id);
+		PhongchieuService.delete(id);
 		return "redirect:/phongchieu/list";
 	}
 	
-	@GetMapping("/update{id}")
+	@GetMapping("/update/{id}")
 	public String update(@PathVariable("id") String id, Model model) {
-		PhongChieu phongchieu = phongchieuServiceImpl.findById(id);
+		PhongChieu phongchieu = PhongchieuService.findById(id);
 		model.addAttribute("PhongchieuForm", phongchieu);
 		return "/phongchieu/update";
 	}
 	
 	@GetMapping("/search")
 	public String search(@RequestParam("searchKey") String searchKey, Model model) {
-		List<PhongChieu> phongchieus = phongchieuServiceImpl.search(searchKey);
+		List<PhongChieu> phongchieus = PhongchieuService.search(searchKey);
 		model.addAttribute("phongchieus", phongchieus);
 		return "/phongchieu/search";
 	}

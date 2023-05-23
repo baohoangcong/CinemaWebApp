@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Range;
@@ -19,30 +20,35 @@ public class PhongChieu {
 	@Id
 	@Column(columnDefinition = "varchar(7)")
 	@Pattern(regexp = "^PC[0-9]{5}$", message = "mã phòng chiếu không đúng định dạng PCxxxxx")
+	@NotBlank(message = "Xin hãy nhập thông tin vào trường này")
 	String maPhongChieu;
 	
+	@Column(columnDefinition = "Nvarchar(20)")
+	@NotBlank(message = "Xin hãy nhập thông tin vào trường này")
+	String tenPhong;
+	
 	@Column(columnDefinition = "Nvarchar(10)")
+	@NotBlank(message = "Xin hãy nhập thông tin vào trường này")
 	String hangPhong;
 	
-//	@Pattern(regexp = "^[+]?\\b[0-9]+\\b$", message = "Số lượng phải là number")
 	@Range(min = 0, message = "Số lượng ghế không được nhỏ hơn 0")
 	int soLuongGhe;
 	
-//	@Pattern(regexp = "^[+]?\\b[0-9]+\\b$", message = "Đơn giá phải là number")
 	@Range(min = 0, message = "Đơn giá không được nhỏ hơn 0")
 	int donGia;
 	
-	@OneToMany(mappedBy = "phongChieu",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "phongChieu",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	Set<SuatChieu> suatChieu;
 	
-	@OneToMany(mappedBy = "phongChieu",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "phongChieu",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	Set<Ghe> ghe;
 
 	public PhongChieu() {
 	}
 
-	public PhongChieu(String maPhongChieu, String hangPhong, int soLuongGhe,int donGia, Set<SuatChieu> suatChieu, Set<Ghe> ghe) {
+	public PhongChieu(String maPhongChieu,String tenPhong, String hangPhong, int soLuongGhe,int donGia, Set<SuatChieu> suatChieu, Set<Ghe> ghe) {
 		this.maPhongChieu = maPhongChieu;
+		this.tenPhong = tenPhong;
 		this.hangPhong = hangPhong;
 		this.soLuongGhe = soLuongGhe;
 		this.suatChieu = suatChieu;
@@ -50,8 +56,9 @@ public class PhongChieu {
 		this.donGia = donGia;
 	}
 
-	public PhongChieu(String maPhongChieu, String hangPhong, int soLuongGhe,int donGia) {
+	public PhongChieu(String maPhongChieu,String tenPhong, String hangPhong, int soLuongGhe,int donGia) {
 		this.maPhongChieu = maPhongChieu;
+		this.tenPhong = tenPhong;
 		this.hangPhong = hangPhong;
 		this.soLuongGhe = soLuongGhe;
 		this.donGia = donGia;
@@ -63,6 +70,14 @@ public class PhongChieu {
 
 	public void setMaPhongChieu(String maPhongChieu) {
 		this.maPhongChieu = maPhongChieu;
+	}
+
+	public String getTenPhong() {
+		return tenPhong;
+	}
+
+	public void setTenPhong(String tenPhong) {
+		this.tenPhong = tenPhong;
 	}
 
 	public String getHangPhong() {

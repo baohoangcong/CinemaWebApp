@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,15 +24,18 @@ public class Phim {
 	@Id
 	@Column(columnDefinition = "varchar(7)")
 	@Pattern(regexp = "^PH[0-9]{5}$", message = "mã phim không đúng định dạng PHxxxxx")
+	@NotBlank(message = "Xin hãy nhập thông tin vào trường này")
 	String maPhim;
 	
 	@Column(columnDefinition = "Nvarchar(50)")
+	@NotBlank(message = "Xin hãy nhập thông tin vào trường này")
 	String tenPhim;
 	
 	@Column(columnDefinition = "Ntext")
 	String moTaPhim;
 	
 	@Column(columnDefinition = "Nvarchar(50)")
+	@NotBlank(message = "Xin hãy nhập thông tin vào trường này")
 	String daoDien;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -49,7 +53,7 @@ public class Phim {
 	@Column(name = "ImagePath")
 	String poster;
 	
-	@OneToMany(mappedBy = "phim",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "phim",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	Set<SuatChieu> suatChieu;
 
 	public Phim() {

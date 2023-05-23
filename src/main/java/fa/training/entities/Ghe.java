@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 @Entity
@@ -23,6 +24,7 @@ public class Ghe{
 	
 	@Column(columnDefinition = "varchar(3)")
 	@Pattern(regexp = "^[A-Z]{1}$", message = "hàng ghế không đúng định dạng [A-Z]")
+	@NotBlank(message = "Xin hãy nhập thông tin vào trường này")
 	String hangGhe;
 
 	public Ghe() {

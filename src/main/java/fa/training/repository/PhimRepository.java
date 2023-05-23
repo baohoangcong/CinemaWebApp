@@ -8,38 +8,38 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import fa.training.entities.PhongChieu;
+import fa.training.entities.Phim;
 import fa.training.page.PageAble;
 
 @Repository
-public class PhongchieuRepositoryImpl {
+public class PhimRepository {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public List<PhongChieu> findAll() {
+	public List<Phim> findAll() {
 		Session session = sessionFactory.getCurrentSession();
-		return session.createQuery("SELECT c FROM PhongChieu c", PhongChieu.class).getResultList();
+		return session.createQuery("SELECT c FROM Phim c", Phim.class).getResultList();
 	}
 	
-	public void saveOrUpdate(PhongChieu PhongChieu) {
+	public void saveOrUpdate(Phim Phim) {
 		Session session = sessionFactory.getCurrentSession();
-		session.saveOrUpdate(PhongChieu);
+		session.saveOrUpdate(Phim);
 	}
 	
-	public void delete(PhongChieu PhongChieu) {
+	public void delete(Phim Phim) {
 		Session session = sessionFactory.getCurrentSession();
-		session.delete(PhongChieu);
+		session.delete(Phim);
 	}
 	
-	public PhongChieu findById(String id) {
+	public Phim findById(String id) {
 		Session session = sessionFactory.getCurrentSession();
-		return session.find(PhongChieu.class, id);
+		return session.find(Phim.class, id);
 	}
 	
-	public List<PhongChieu> findWithPageAble(PageAble pageAble) {
+	public List<Phim> findWithPageAble(PageAble pageAble) {
 		Session session = sessionFactory.getCurrentSession();
-		return session.createQuery("SELECT c FROM PhongChieu c", PhongChieu.class)
+		return session.createQuery("SELECT c FROM Phim c", Phim.class)
 				.setFirstResult(pageAble.getOffset())
 				.setMaxResults(pageAble.getSize())
 				.getResultList();
@@ -47,19 +47,19 @@ public class PhongchieuRepositoryImpl {
 	
 	public long count() {
 		Session session = sessionFactory.getCurrentSession();
-		return session.createQuery("SELECT COUNT(*) FROM PhongChieu", Long.class).getSingleResult();
+		return session.createQuery("SELECT COUNT(*) FROM Phim", Long.class).getSingleResult();
 	}
 	
-	public List<PhongChieu> search(String searchKey) {
+	public List<Phim> search(String searchKey) {
 		Session session = sessionFactory.getCurrentSession();
-		Query<PhongChieu> query = session.createQuery("SELECT c FROM PhongChieu c WHERE c.maPhongChieu LIKE :searchKey", PhongChieu.class);
+		Query<Phim> query = session.createQuery("SELECT c FROM Phim c WHERE c.maPhim LIKE :searchKey", Phim.class);
 		query.setParameter("searchKey", "%" + searchKey + "%");
 		return query.getResultList();
 	}
 	
 	public boolean existInDB(String s) {
 		Session session = sessionFactory.getCurrentSession();
-		Query<Long> query = session.createQuery("SELECT COUNT(*) FROM PhongChieu c WHERE c.donGia = :s", Long.class);
+		Query<Long> query = session.createQuery("SELECT COUNT(*) FROM Phim c WHERE c.maPhim = :s", Long.class);
 		query.setParameter("s", s);
 		return query.getSingleResult() > 0;
 	}

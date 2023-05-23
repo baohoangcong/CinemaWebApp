@@ -62,13 +62,13 @@ td {
 		style="margin-top: 100px; margin-bottom: 100px; width: 80%">
 
 		<div class="mb-3">
-			<a href="add" class="btn btn-dark">Add New Phòng Chiếu</a>
+			<a href="add" class="btn btn-dark">Add New Suất Chiếu</a>
 		</div>
 
 
 		<div>
 			<form class="d-flex"
-				action="${pageContext.request.contextPath}/phongchieu/search"
+				action="${pageContext.request.contextPath}/suatchieu/search"
 				method="get">
 				<input type="text" name="searchKey" class="form-control"> <input
 					type="submit" value="Search" class="btn btn-success mx-2">
@@ -80,23 +80,27 @@ td {
 		<table class="table table-hover table-striped">
 			<thead>
 				<tr>
-					<th>Mã Phòng Chiếu</th>
-					<th>Hạng Phòng</th>
-					<th>Số Lượng Ghế</th>
-					<th>Đơn Giá</th>
+					<th>Mã Suất Chiếu</th>
+					<th>Phim</th>
+					<th>Phòng Chiếu</th>
+					<th>Ngày Chiếu</th>
+					<th>Giờ Bắt Đầu</th>
+					<th>Giờ Kết Thúc</th>
 					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="c" items="${phongchieus}" varStatus="status">
+				<c:forEach var="c" items="${suatchieus}" varStatus="status">
 					<tr>
-						<td>${c.maPhongChieu}</td>
-						<td>${c.hangPhong}</td>
-						<td>${c.soLuongGhe}</td>
-						<td>${c.donGia}</td>
-						<td><a href="delete?id=${c.maPhongChieu}" id="delete"
+						<td>${c.maSuatChieu}</td>
+						<td>${c.phim.maPhim}</td>
+						<td>${c.phongChieu.maPhongChieu}</td>
+						<td>${c.ngayChieu}</td>
+						<td>${c.gioBatDau}</td>
+						<td>${c.gioKetThuc}</td>
+						<td><a href="delete?id=${c.maSuatChieu}" id="delete"
 							class="btn btn-danger">Delete</a> <a
-							href="update/${c.maPhongChieu}" class="btn btn-warning">Update</a></td>
+							href="update/${c.maSuatChieu}" class="btn btn-warning">Update</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -105,7 +109,7 @@ td {
 
 		<br>
 
-	<%-- 	<div class="pagination">
+		<%-- <div class="pagination">
 			<c:if test="${currentPage > 1}">
 				<a href="list?page=${currentPage-1}" class="btn btn-light">Previous</a>
 			</c:if>
@@ -152,6 +156,11 @@ td {
 					&raquo;</a>
 			</c:if>
 		</div>
+
+
+
+
+
 
 	</div>
 

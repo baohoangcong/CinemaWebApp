@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -43,7 +42,6 @@ public class SuDungDichVu {
 	@Column(columnDefinition = "Time")
 	LocalTime gioSuDung;
 	
-	@Pattern(regexp = "^[+]?\\b[0-9]+\\b$", message = "Số lượng phải là number")
 	@Range(min = 0, message = "Số lượng không được nhỏ hơn 0")
 	int soLuong;
 

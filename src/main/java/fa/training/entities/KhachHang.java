@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
@@ -28,6 +29,7 @@ public class KhachHang {
 	
 	@Column(columnDefinition = "Nvarchar(50)")
 	@Pattern(regexp = "^[a-zA-ZÀ-ỹỲ-ỹĐđ]+(\\s[a-zA-ZÀ-ỹỲ-ỹĐđ]+)+{3-50}$", message = "Họ tên ít nhất phải có 2 từ và dài từ 3-50 kí tự")
+	@NotBlank(message = "Xin hãy nhập thông tin vào trường này")
 	String tenKhachHang;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -36,10 +38,12 @@ public class KhachHang {
 	
 	@Column(columnDefinition = "varchar(50)")
 	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Địa chỉ email không đúng định dạng")
+	@NotBlank(message = "Xin hãy nhập thông tin vào trường này")
 	String email;
 	
 	@Column(columnDefinition = "varchar(11)")
 	@Pattern(regexp = "0[0-9]{9}", message = "Số điện thoại phải bắt đầu bằng 0 và có 10 số")
+	@NotBlank(message = "Xin hãy nhập thông tin vào trường này")
 	String sdt;
 	
 	@Column(columnDefinition = "Nvarchar(5)")
@@ -48,13 +52,13 @@ public class KhachHang {
 	@Column(columnDefinition = "Nvarchar(100)")
 	String diaChi;
 	
-	@OneToOne(mappedBy = "khachHang",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "khachHang",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	TaiKhoan taiKhoan;
 	
-	@OneToMany(mappedBy = "khachHang",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "khachHang",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	Set<SuDungDichVu> suDungDichVu;
 	
-	@OneToMany(mappedBy = "khachHang",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "khachHang",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	Set<Ve> ve;
 	
 	public KhachHang() {

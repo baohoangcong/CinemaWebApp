@@ -35,16 +35,21 @@ public class SuatChieu {
 	
 	@DateTimeFormat(pattern = "HH:mm")
 	@Column(columnDefinition = "Time")
-	LocalTime gioChieu;
+	LocalTime gioBatDau;
+	
+	@DateTimeFormat(pattern = "HH:mm")
+	@Column(columnDefinition = "Time")
+	LocalTime gioKetThuc;
 
 	public SuatChieu() {
 	}
 
-	public SuatChieu( Phim phim, PhongChieu phongChieu, LocalDate ngayChieu, LocalTime gioChieu) {
+	public SuatChieu(Phim phim, PhongChieu phongChieu, LocalDate ngayChieu, LocalTime gioBatDau,LocalTime gioKetThuc) {
 		this.phim = phim;
 		this.phongChieu = phongChieu;
 		this.ngayChieu = ngayChieu;
-		this.gioChieu = gioChieu;
+		this.gioBatDau = gioBatDau;
+		this.gioKetThuc = gioKetThuc;
 	}
 
 	public int getMaSuatChieu() {
@@ -79,19 +84,22 @@ public class SuatChieu {
 		this.ngayChieu = ngayChieu;
 	}
 
-	public LocalTime getGioChieu() {
-		return gioChieu;
+	public LocalTime getGioBatDau() {
+		return gioBatDau;
 	}
 
-	public void setGioChieu(LocalTime gioChieu) {
-		this.gioChieu = gioChieu;
+	public void setGioBatDau(LocalTime gioBatDau) {
+		this.gioBatDau = gioBatDau;
 	}
 
-	@Override
-	public String toString() {
-		return String.format("SuatChieu [maSuatChieu=%s, phim=%s, phongChieu=%s, ngayChieu=%s, gioChieu=%s]",
-				maSuatChieu, phim, phongChieu, ngayChieu, gioChieu);
+	public LocalTime getGioKetThuc() {
+		return gioKetThuc;
 	}
+
+	public void setGioKetThuc(LocalTime gioKetThuc) {
+		this.gioKetThuc = gioKetThuc;
+	}
+
 	
 	
 }

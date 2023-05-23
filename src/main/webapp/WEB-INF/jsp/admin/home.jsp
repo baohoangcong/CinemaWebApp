@@ -13,11 +13,12 @@
 <link href="<c:url value="/resources/fontawesome/css/all.min.css"/>" rel="stylesheet">
 <script src="<c:url value="/resources/js/jquery-3.6.4.min.js" />"></script>
 <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+
 </head>
 <body>
 	<%@ include file="/common/header.jsp"%>
 	
-
+		<h1>Hello</h1>
 	<%@ include file="/common/footer.jsp"%>
 	<script src="<c:url value="/resources/js/scripts.js"/>"></script>
 </body>

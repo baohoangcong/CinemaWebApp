@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
@@ -19,20 +21,22 @@ import org.hibernate.validator.constraints.Range;
 public class DichVu {
 	@Id
 	@Pattern(regexp = "^DV[0-9]{5}$",message ="Mã dịch vụ không đúng định dạng (DVxxxxx)")
+	@NotBlank(message = "Xin hãy nhập thông tin vào trường này")
 	String maDichVu;
 	
 	@Column(columnDefinition = "Nvarchar(50)")
 	@Length(min = 3,max = 50, message = "Tên dịch vụ từ 3-50 kí tự")
+	@NotBlank(message = "Xin hãy nhập thông tin vào trường này")
 	String tenDichVu;
 	
 	@Column(columnDefinition = "Ntext")
 	String moTaDichVu;
 	
-	@Pattern(regexp = "^[+]?\\b[0-9]+\\b$", message = "Đơn giá phải là number")
-	@Range(min = 0, message = "Đơn giá không được nhỏ hơn 0")
-	Integer donGia;
+	@Range(min = 1, message = "Đơn giá không được nhỏ hơn hoặc bằng 0")
+	@NotNull(message = "Xin hãy nhập thông tin vào trường này")
+	int donGia;
 	
-	@OneToMany(mappedBy = "dichVu",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "dichVu",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	Set<SuDungDichVu> suDungDichVu;
 
 	public DichVu() {

@@ -22,9 +22,9 @@
 		
 		<div class="container bg-light p-5" style="margin-top: 100px; margin-bottom: 100px; width: 500px">
 			
-			<%-- <div>
-				<a href="${pageContext.request.contextPath}" class="btn btn-primary">Home</a>
-			</div> --%>
+			<div>
+				<a href="${pageContext.request.contextPath}/phongchieu/list" class="btn btn-primary">List Phòng Chiếu</a>
+			</div>
 			
 			<form:form action="${pageContext.request.contextPath}/phongchieu/save" method="post" modelAttribute="PhongchieuForm">
 			

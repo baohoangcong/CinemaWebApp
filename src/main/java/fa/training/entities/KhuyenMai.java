@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,9 +22,11 @@ public class KhuyenMai {
 	@Id
 	@Column(columnDefinition = "varchar(7)")
 	@Pattern(regexp = "^KM[0-9]{5}$", message = "mã khuyến mãi không đúng định dạng KMxxxxx")
+	@NotBlank(message = "Xin hãy nhập thông tin vào trường này")
 	String maKhuyenMai;
 	
 	@Column(columnDefinition = "Nvarchar(50)")
+	@NotBlank(message = "Xin hãy nhập thông tin vào trường này")
 	String tenKhuyenMai;
 	
 	@Column(columnDefinition = "Ntext")
@@ -35,14 +38,13 @@ public class KhuyenMai {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	LocalDate ngayKetThuc;
 	
-	@Pattern(regexp = "^[+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?$", message = "vui lòng nhập đúng định dạng")
 	@Min(value = 0, message = "vui lòng nhập số lớn hơn hoặc bằng 0")
 	double tiLeKhuyenMai;
 	
-	@OneToMany(mappedBy = "khuyenMai",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "khuyenMai",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	Set<SuDungDichVu> suDungDichVu;
 
-	@OneToMany(mappedBy = "khuyenMai",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "khuyenMai",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	Set<Ve> ve;
 	
 	public KhuyenMai() {

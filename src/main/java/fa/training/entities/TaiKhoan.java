@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 @Entity
@@ -14,10 +15,12 @@ public class TaiKhoan {
 	@Id
 	@Column(columnDefinition = "varchar(16)")
 	@Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9_]{2,15}$", message = "Account từ 3-16 kí tự, chỉ chứa dấu gạch dưới và không có kí tự đặc biệt")
+	@NotBlank(message = "Xin hãy nhập thông tin vào trường này")
 	String account;
 	
 	@Column(columnDefinition = "varchar(20)")
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])[a-zA-Z\\d!@#$%^&*]{8,20}$", message = "Mật khẩu từ 8-20 kí tự, có ít nhất 1 chữ hoa, 1 số và 1 kí tự đặc biệt")
+	@NotBlank(message = "Xin hãy nhập thông tin vào trường này")
 	String password;
 	
 	@OneToOne
